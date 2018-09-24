@@ -24,14 +24,16 @@ export default class IndexScreen extends Component {
     }
   }
   playTrack = (status) => {
-    const url = trackList[setup[status]].url
-    const track = new Sound(url, null, (e) => {
-      if (e) {
-        console.log('error loading track:', e)
-      } else {
-        track.play()
-      }
-    })
+    if (status) {
+      const url = trackList[setup[status]].url
+      const track = new Sound(url, null, (e) => {
+        if (e) {
+          console.log('error loading track:', e)
+        } else {
+          track.play()
+        }
+      })
+    }
   }
   getPosition = (styles) => {
     let position = ''
@@ -75,7 +77,9 @@ export default class IndexScreen extends Component {
                     onEnd={this.onEnd}
                     onChange={this.onChange}
                     >
-                      <View style={styles.innerPad}/>
+                      <View style={styles.innerPad}>
+                        <View style={styles.corePad}/>
+                      </View>
                     </Gestures>
                   </View>
                 </View>
@@ -111,9 +115,15 @@ const styles = StyleSheet.create({
     overflow: 'hidden',
   }, 
   innerPad: {
-    width: 40,
-    height: 40,
-    borderRadius: 30,
+    width: 120,
+    height: 120,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  corePad: {
+    width: 50,
+    height: 50,
+    borderRadius: 50,
     backgroundColor: 'rgba(0,0,0, 0.7)'
   },
 });
