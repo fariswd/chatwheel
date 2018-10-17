@@ -4,9 +4,11 @@ import {
   Text,
   StyleSheet,
   Dimensions,
-  ImageBackground
+  ImageBackground,
+  TouchableOpacity,
 } from 'react-native';
 import Gestures from 'react-native-easy-gestures';
+import FontAwesome, { Icons } from 'react-native-fontawesome';
 import Sound from 'react-native-sound';
 
 import TextWheel from './component/TextWheel'
@@ -16,6 +18,21 @@ import setup from '../../constant/setup'
 const {height, width} = Dimensions.get('window');
 
 export default class IndexScreen extends Component {
+  static navigationOptions = ({navigation}) => {
+    return {
+      headerLeft: (
+        <TouchableOpacity
+          onPress={() => navigation.navigate('Setting')}
+          style={{paddingHorizontal: 20}}>
+          <FontAwesome style={{ fontSize: 20, color: 'white' }}>{Icons.cog}</FontAwesome>
+        </TouchableOpacity>
+      ),
+      headerTransparent: true,
+      headerStyle: {
+        borderBottomWidth: 0,
+      }
+    }
+  }
   constructor() {
     super()
     this.state = {
@@ -57,11 +74,9 @@ export default class IndexScreen extends Component {
     this.setState({position: ''})
   }
   render() {
-    const {position} = this.state
     return (
       <View style={styles.container}>
         <ImageBackground resizeMode="cover" source={{uri: 'background'}} style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
-          
           <View style={{height: 200, width: width}}>
             <TextWheel pos="top" state={this.state} />
             <View style={{flexDirection: 'row', alignItems: 'center'}}>

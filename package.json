@@ -10,7 +10,9 @@
     "react": "16.5.0",
     "react-native": "0.57.1",
     "react-native-easy-gestures": "git+https://github.com/fariswd/react-native-easy-gestures.git",
-    "react-native-sound": "^0.10.9"
+    "react-native-fontawesome": "^5.7.0",
+    "react-native-sound": "^0.10.9",
+    "react-navigation": "^2.14.2"
   },
   "devDependencies": {
     "babel-jest": "23.6.0",
