@@ -4,12 +4,10 @@ import {
   Text,
   StyleSheet,
 } from 'react-native';
-
 import trackList from '../../../constant/tracklist'
-import setup from '../../../constant/setup'
 
 export default ({pos, state}) => {
-  const {position} = state
+  const { position, wheels } = state
   switch (pos) {
     case 'top':
       return (
@@ -21,7 +19,7 @@ export default ({pos, state}) => {
             },
             position == pos && styles.selected,
             ]}>
-            {trackList[setup[pos]].name}
+            {trackList[wheels[pos]].name}
           </Text>
         </View>
       )
@@ -37,7 +35,7 @@ export default ({pos, state}) => {
             },
             position == pos && styles.selected
             ]}>
-              {trackList[setup[pos]].name}
+              {trackList[wheels[pos]].name}
           </Text>
         </View>
       )
@@ -52,7 +50,7 @@ export default ({pos, state}) => {
             },
             position == 'left' && styles.selected
             ]}>
-              {trackList[setup[pos]].name}
+              {trackList[wheels[pos]].name}
           </Text>
         </View>
       )
@@ -68,7 +66,7 @@ export default ({pos, state}) => {
             },
             position == pos && styles.selected
             ]}>
-              {trackList[setup[pos]].name}
+              {trackList[wheels[pos]].name}
           </Text>
         </View>
       )
@@ -82,7 +80,7 @@ export default ({pos, state}) => {
             },
             position == pos && styles.selected
             ]}>
-              {trackList[setup[pos]].name}
+              {trackList[wheels[pos]].name}
           </Text>
         </View>
       )
@@ -93,7 +91,7 @@ export default ({pos, state}) => {
             styles.textNormal,
             {},
             position == pos && styles.selected]}>
-              {trackList[setup[pos]].name}
+              {trackList[wheels[pos]].name}
           </Text>
         </View>
       )
@@ -107,7 +105,7 @@ export default ({pos, state}) => {
             },
             position == pos && styles.selected
             ]}>
-              {trackList[setup[pos]].name}
+              {trackList[wheels[pos]].name}
           </Text>
         </View>
       )
@@ -117,7 +115,7 @@ export default ({pos, state}) => {
           <Text style={[
             styles.textNormal,
             {textAlign: 'center'}, position == pos && styles.selected]}>
-            {trackList[setup[pos]].name}
+            {trackList[wheels[pos]].name}
           </Text>
         </View>
       )
