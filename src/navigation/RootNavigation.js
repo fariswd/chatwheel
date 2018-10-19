@@ -3,6 +3,7 @@ import { createStackNavigator } from 'react-navigation'
 
 import IndexScreen from '../screen/IndexScreen'
 import SettingScreen from '../screen/SettingScreen'
+import ChooseScreen from '../screen/ChooseScreen'
 
 const stacks = {
   Home: {
@@ -10,6 +11,9 @@ const stacks = {
   },
   Setting: {
     screen: SettingScreen,
+  },
+  Choose: {
+    screen: ChooseScreen,
   }
 }
 

@@ -6,6 +6,7 @@ import {
   Dimensions,
   ImageBackground,
   TouchableOpacity,
+  AsyncStorage,
 } from 'react-native';
 import Gestures from 'react-native-easy-gestures';
 import FontAwesome, { Icons } from 'react-native-fontawesome';
@@ -38,11 +39,35 @@ export default class IndexScreen extends Component {
     this.state = {
       status: false,
       position: false,
+      wheels: false,
+      errorMsg: false,
+    }
+  }
+  componentDidMount() {
+    this.getData()
+  }
+  getData = async () => {
+    try {
+      const wheels = await AsyncStorage.getItem('wheels')
+      if (wheels !== null) {
+        this.setState({
+          wheels: JSON.parse(wheels)
+        })
+      } else {
+        this.setState({
+          wheels: setup
+        })
+      }
+    } catch (error) {
+      this.setState({
+        wheels: setup
+      })
     }
   }
   playTrack = (status) => {
+    const { wheels } = this.state
     if (status) {
-      const url = trackList[setup[status]].url
+      const url = trackList[wheels[status]].url
       const track = new Sound(url, null, (e) => {
         if (e) {
           console.log('error loading track:', e)
@@ -74,10 +99,11 @@ export default class IndexScreen extends Component {
     this.setState({position: ''})
   }
   render() {
+    const { wheels } = this.state
     return (
       <View style={styles.container}>
         <ImageBackground resizeMode="cover" source={{uri: 'background'}} style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
-          <View style={{height: 200, width: width}}>
+          {wheels && <View style={{height: 200, width: width}}>
             <TextWheel pos="top" state={this.state} />
             <View style={{flexDirection: 'row', alignItems: 'center'}}>
               <View style={{flex: 1, alignItems: 'flex-end'}}>
@@ -95,17 +121,17 @@ export default class IndexScreen extends Component {
                       <View style={styles.innerPad}>
                         <View style={styles.corePad}/>
                       </View>
-                    </Gestures>
-                  </View>
-                </View>
-                <View style={{flex: 1}}>
-                  <TextWheel pos="topright" state={this.state} />
-                  <TextWheel pos="right" state={this.state} />
-                  <TextWheel pos="bottomright" state={this.state} />
+                  </Gestures>
                 </View>
               </View>
-              <TextWheel pos="bottom" state={this.state} />
+              <View style={{flex: 1}}>
+                <TextWheel pos="topright" state={this.state} />
+                <TextWheel pos="right" state={this.state} />
+                <TextWheel pos="bottomright" state={this.state} />
+              </View>
             </View>
+            <TextWheel pos="bottom" state={this.state} />
+          </View>}
         </ImageBackground>
       </View>
     );
